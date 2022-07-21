@@ -30,11 +30,17 @@ const config: config  = {
 					: [],
 			chainId: 4,
 		},
-		localhost: {
-			url: 'http://127.0.0.1:8545',
+		// localhost: {
+		// 	url: 'http://127.0.0.1:8545',
+		// 	chainId: 31337,
+		// 	// accounts: hardhat localhost node will pick up the first account
+		// },
+		hardhat: {
 			chainId: 31337,
-			// accounts: hardhat localhost node will pick up the first account
-		},
+			forking: {
+				url: process.env.MAINET_RPC_URL!
+			}
+		}
 	},
 	gasReporter: {
 		enabled: process.env.REPORT_GAS !== undefined,
