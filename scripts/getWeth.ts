@@ -47,7 +47,7 @@ export async function getWeth() {
     // console.log("iWeth in getWeth: ", iWeth)
 
     const tx = await iWeth.deposit({value: AMOUNT})
-    console.log("tx in getWeth: ", tx)
+    // console.log("tx in getWeth: ", tx)
 
     await tx.wait(1)
     const wethBalance:BigNumber = await iWeth.balanceOf(deployer)
