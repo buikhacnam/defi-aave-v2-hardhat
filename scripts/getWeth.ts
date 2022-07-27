@@ -13,17 +13,15 @@ export const AMOUNT = ethers.utils.parseEther('0.02')
 export const AMOUNT2 = ethers.utils.parseEther('0.03')
 export const AMOUNT3 = ethers.utils.parseEther('0.1')
 
-
 export async function getWeth() {
+	const { deployer } = await getNamedAccounts()
+	console.log('deployer in getWeth: ', deployer)
+	// How to call the deposit function of the Weth contract???
+	// you need abi and contract address of the Weth contract
 
-    const { deployer } = await getNamedAccounts()
-    console.log("deployer in getWeth: ", deployer)
-    // How to call the deposit function of the Weth contract???
-    // you need abi and contract address of the Weth contract
+	// Weth contract mainet: 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 
-    // Weth contract mainet: 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
-
-    /*
+	/*
     In order to run this, we have to fork the mainnet and run as a local hardhat node
     that pretending to be a mainnet node.
     Read more here: https://hardhat.org/hardhat-network/docs/guides/forking-other-networks
@@ -34,23 +32,27 @@ export async function getWeth() {
 
     And you need to update the hardhat.config.ts file to use the fork in the hardhat network:
 
-    	hardhat: {
-			chainId: 31337,
-			forking: {
-				url: process.env.MAINET_RPC_URL!
-			}
-		}
+    hardhat: {
+      chainId: 31337,
+      forking: {
+        url: process.env.MAINET_RPC_URL!
+      }
+    }
 
     */
 
-    const iWeth = await ethers.getContractAt('IWeth', '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2', deployer)
-    // console.log("iWeth in getWeth: ", iWeth)
+	const iWeth = await ethers.getContractAt(
+		'IWeth',
+		'0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
+		deployer
+	)
+	// console.log("iWeth in getWeth: ", iWeth)
 
-    const tx = await iWeth.deposit({value: AMOUNT})
-    // console.log("tx in getWeth: ", tx)
+	const tx = await iWeth.deposit({ value: AMOUNT })
+	// console.log("tx in getWeth: ", tx)
 
-    await tx.wait(1)
-    const wethBalance:BigNumber = await iWeth.balanceOf(deployer)
-    console.log("wethBalance in getWeth: ", wethBalance.toString()) //20000000000000000 -> 0.02 ETH
-    return wethBalance
-}   
+	await tx.wait(1)
+	const wethBalance: BigNumber = await iWeth.balanceOf(deployer)
+	console.log('wethBalance in getWeth: ', wethBalance.toString()) //20000000000000000 -> 0.02 ETH
+	return wethBalance
+}
