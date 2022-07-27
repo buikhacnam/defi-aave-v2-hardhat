@@ -7,11 +7,11 @@
 This website explains the Weth contract: 
 https://weth.io/
 
-Check the file `scripts/getWeth.ts` for the implemenation and explanation of deposit ETH.
+Check the file `scripts/getWeth.ts` for the implementation and explanation of deposit ETH.
 
 # Aave v2 
 
-Check the file `scripts/aaveBorrow.ts` for implematation and explanation of deposit, borrow and repay.
+Check the file `scripts/aaveBorrow.ts` for implementation and explanation of deposit, borrow and repay.
 
 
 # Some command lines used in the project
